@@ -17,7 +17,7 @@
 //    GNU General Public License for more details.
 //   
 //    You should have received a copy of the GNU General Public License
-//    along with Nightdriver.  It is normally found in copying.txt
+//    along with NightDriver.  It is normally found in copying.txt
 //    If not, see <https://www.gnu.org/licenses/>.
 //
 // Description:
@@ -31,19 +31,13 @@
 #pragma once
 
 #include "globals.h"
+#include "secrets.h"
 #include <sys/cdefs.h>
 #include <sys/time.h>
 #include <time.h>
 #include <WiFi.h>
 #include <WiFiUdp.h>
 #include <mutex>
-
-// define the NTP server to connect too (replace . [dots] in IP addresses with , [commas])
-//#define cszNTPServer  192, 168, 1, 2
-#define cszNTPServer  94, 199, 173, 123     // 0.pool.ntp.org
-//#define cszNTPServer 216, 239, 35, 12     // google time
-//#define cszNTPServer 17, 253, 16, 253     // apple time
-
 
 // NTPTimeClient
 //

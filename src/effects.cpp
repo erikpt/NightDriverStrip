@@ -365,14 +365,20 @@ DRAM_ATTR LEDStripEffect * AllEffects[] =
 
   #elif SPECTRUM
 
+
     new SpectrumAnalyzerEffect("Spectrum Standard", spectrumBasicColors),
+    /*
     new GhostWave("GhostWave One", new CRGBPalette256(CRGBPalette16(CRGB::Blue,  CRGB::Green, CRGB::Yellow, CRGB::Red)), 4),
     new SpectrumAnalyzerEffect("Spectrum USA", USAColors_p, 0),
     new GhostWave("GhostWave Rainbow", &rainbowPalette, 8),
     new SpectrumAnalyzerEffect("Spectrum Fade", spectrumBasicColors, 50, 70, -1.0, 3.0),
     new GhostWave("GhostWave Blue", new CRGBPalette256(CRGBPalette16(CRGB::DarkBlue, CRGB::Blue, CRGB::Blue, CRGB::White)), 0),
     new GhostWave("GhostWave Rainbow", &rainbowPalette),
-   
+    */
+  #elif OGSPECTRUM
+
+    new SpectrumAnalyzerEffect("Spectrum Standard", spectrumBasicColors),
+
   #elif UMBRELLA
   
     new PaletteFlameEffect("Smooth Red Fire", heatmap_pal),
@@ -581,6 +587,9 @@ DRAM_ATTR LEDStripEffect * AllEffects[] =
     new PaletteEffect(MagentaColors_p),                                                                           // Rainbow palette
     new DoublePaletteEffect(),        
 
+#else
+
+    #error "You likely need to define some effects, as code doesn't work without any"
 #endif
 
 };

@@ -123,7 +123,7 @@ public:
     return to16bit(CRGB(code));
   }
 
-  inline uint16_t getPixelIndex(int16_t x, int16_t y) const
+  virtual inline uint16_t getPixelIndex(int16_t x, int16_t y) const
   {
     if (x & 0x01)
     {

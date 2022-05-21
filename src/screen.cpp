@@ -45,7 +45,11 @@ uint32_t g_Watts;
 
 #if USE_OLED
     #define SCREEN_ROTATION U8G2_R2
-    U8G2_SSD1306_128X64_NONAME_F_HW_I2C * g_pDisplay = new U8G2_SSD1306_128X64_NONAME_F_HW_I2C(SCREEN_ROTATION, /*reset*/ 16, /*clk*/ 15, /*data*/ 4);
+    U8G2_SSD1306_128X64_NONAME_F_HW_I2C * g_pDisplay = new U8G2_SSD1306_128X64_NONAME_F_HW_I2C(
+                                                                            SCREEN_ROTATION, 
+                                                                            /*reset*/ 16, 
+                                                                            /*clk*/   15, 
+                                                                            /*data*/   4);
 #endif
 
 extern DRAM_ATTR std::shared_ptr<LEDMatrixGFX> g_pStrands[NUM_CHANNELS];

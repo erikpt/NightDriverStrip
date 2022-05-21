@@ -33,3 +33,8 @@
 #define cszSSID       "Your SSID"
 #define cszPassword   "Your PASS"
 #define cszHostname   "NightDriverStrip"
+#define cszNTPServer  94, 199, 173, 123     // 0.pool.ntp.org
+
+//#define cszNTPServer 192, 168, 1, 2       // Example for local LAN
+//#define cszNTPServer 216, 239, 35, 12     // google time
+//#define cszNTPServer 17, 253, 16, 253     // apple time

@@ -57,8 +57,8 @@ int g_AudioFPS = 0;				          // Framerate of the audio sampler
 unsigned long g_lastPeak1Time[NUM_BANDS] = { 0 } ;
 float g_peak1Decay[NUM_BANDS] = { 0 };
 float g_peak2Decay[NUM_BANDS] = { 0 };
-float g_peak1DecayRate;
-float g_peak2DecayRate;
+float g_peak1DecayRate = 2.0;
+float g_peak2DecayRate = 2.0;
 
 // Depending on how many bands have been defined, one of these tables will contain the frequency
 // cutoffs for that "size" of a spectrum display.  
@@ -73,12 +73,19 @@ float g_peak2DecayRate;
 		{
 			0.05f, 0.15f, 0.2f, 0.225f, 0.25f, 0.3f, 0.35f, 0.4f, 0.425f, 0.6f, 0.7f, 0.8f, 0.8f, 0.9f, 1.0f, 1.0f
 		};
-	#else
+	#elif M5STICKC
 		const float scalarsBand[16] = 
 		{
 			0.1f, 0.15f, 0.2f, 0.225f, 0.25f, 0.3f, 0.35f, 0.4f, 0.25f, 0.25f, 0.25f, 0.25f, 0.4f, 0.5f, 0.5f, 0.35f
 		};
+	#else
+		const float scalarsBand[16] = 
+		{
+			0.3f, 0.6f, 0.8f, 0.9f, 1.0f, 1.0f, 1.0f, 1.0f, 1.1f, 1.1f, 1.25f, 1.40f, 1.60f, 1.80f, 1.90f, 2.0f
+		};
+
 	#endif
+
 #endif
 
 #if NUM_BANDS == 5

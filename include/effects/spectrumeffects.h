@@ -104,6 +104,8 @@ class InsulatorSpectrumEffect : public virtual BeatEffectBase, public virtual Pa
 
 class VUMeterEffect : public LEDStripEffect
 {
+    double lastBars = 0.0;
+
   protected:
 
     // DrawVUPixels
@@ -125,6 +127,7 @@ class VUMeterEffect : public LEDStripEffect
 
     void DrawVUMeter(int yVU)
     {
+
         auto pGFXChannel = _GFX[0];
 
         static int iPeakVUy = 0;        // size (in LED pixels) of the VU peak
@@ -142,7 +145,22 @@ class VUMeterEffect : public LEDStripEffect
         }
 
         int xHalf = pGFXChannel->width()/2-1;
-        int bars  = gVURatio / 2.0 * xHalf; // map(gVU, 0, MAX_VU/8, 1, xHalf);
+        int bars  = gVURatio / 2.0 * xHalf; 
+        //int bars = map(gVU, gMinVU, MAX_VU/8, 1, xHalf);
+
+        // Fade the bar back towards the origin by the defined rate. If the new value
+        // is larger, we always go UP immediately
+
+        if (bars > lastBars)
+        {
+            lastBars = bars;
+        }
+        else
+        {
+            lastBars -= g_AppTime.DeltaTime() * VU_FADE_RATE_BARS_PER_SEC;
+            bars = lastBars;
+        }
+
         bars = min(bars, xHalf);
 
         if (bars > iPeakVUy)
@@ -179,8 +197,10 @@ class SpectrumAnalyzerEffect : public VUMeterEffect
     uint8_t   _colorOffset;
     uint16_t  _scrollSpeed;
     uint8_t   _fadeRate;
-
     CRGBPalette256 _palette;
+    float     _peak1DecayRate;
+    float     _peak2DecayRate;
+
 
     // DrawBand
     //
@@ -238,8 +258,10 @@ class SpectrumAnalyzerEffect : public VUMeterEffect
 
         // if decay rate is less than zero we interpret that here to mean "don't draw it at all".  
 
-        if (g_peak1DecayRate >= 0.0f)
+        if (_peak1DecayRate >= 0.0f)
+        {
             pGFXChannel->drawLine(xOffset, max(0, yOffset-1), xOffset + bandWidth - 1, max(0, yOffset-1),pGFXChannel->to16bit(colorHighlight));
+        }
     }
 
   public:
@@ -254,10 +276,11 @@ class SpectrumAnalyzerEffect : public VUMeterEffect
           _colorOffset(0),
           _scrollSpeed(scrollSpeed), 
           _fadeRate(fadeRate),
-          _palette(palette)
+          _palette(palette),
+          _peak1DecayRate(peak1DecayRate),
+          _peak2DecayRate(peak2DecayRate)
+
     {
-        g_peak1DecayRate = peak1DecayRate;
-        g_peak2DecayRate = peak2DecayRate;
     }
 
     SpectrumAnalyzerEffect(const char   * pszFriendlyName = nullptr, 
@@ -269,7 +292,9 @@ class SpectrumAnalyzerEffect : public VUMeterEffect
           _colorOffset(0),
           _scrollSpeed(0), 
           _fadeRate(fadeRate),
-          _palette(baseColor)
+          _palette(baseColor),
+          _peak1DecayRate(peak1DecayRate),
+          _peak2DecayRate(peak2DecayRate)
     {
     }
 

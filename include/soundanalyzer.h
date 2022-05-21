@@ -93,6 +93,10 @@ using namespace std;
 #define MAX_VU MAX_ANALOG_IN
 #define MIN_VU 8
 
+#ifndef VU_FADE_RATE_BARS_PER_SEC
+#define VU_FADE_RATE_BARS_PER_SEC 40
+#endif
+
 #ifndef GAINDAMPEN
 #define GAINDAMPEN  1									  // How slowly brackets narrow in for spectrum bands
 #endif
