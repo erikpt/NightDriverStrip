@@ -671,14 +671,17 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
     #define WAIT_FOR_WIFI           1   // Hold in setup until we have WiFi - for strips without effects
     #define TIME_BEFORE_LOCAL       5   // How many seconds before the lamp times out and shows local content
 
-    #define NUM_CHANNELS    1
-    #define MATRIX_WIDTH    (8*144)       // My naximum run, and about all you can do at 30fps  
-    #define MATRIX_HEIGHT   1
-    #define NUM_LEDS        (MATRIX_WIDTH * MATRIX_HEIGHT)
-    #define RESERVE_MEMORY  160000                // WiFi needs about 100K free to be able to (re)connect!
-    #define ENABLE_REMOTE   0                     // IR Remote Control
-    #define ENABLE_AUDIO    0                     // Listen for audio from the microphone and process it
-    #define LED_PIN0        5
+    #define NUM_CHANNELS            1
+    #define MATRIX_WIDTH            (8*144)     // My naximum run, and about all you can do at 30fps  
+    #define MATRIX_HEIGHT           1
+    #define NUM_LEDS                (MATRIX_WIDTH * MATRIX_HEIGHT)
+    #define RESERVE_MEMORY          160000      // WiFi needs about 100K free to be able to (re)connect!
+    #define ENABLE_REMOTE           0           // IR Remote Control
+    #define ENABLE_AUDIO            0           // Listen for audio from the microphone and process it
+    #define LED_PIN0                5           // Pin used to control the LED string.  Ensure that you also remember to conenct to ground.
+
+    #define ENABLE_WEBSERVER        1           // Turn on the internal webserver
+
 
     #define POWER_LIMIT_MW (NUM_LEDS/32 * 1000)        // Assumes 32mA per LED.  Make sure you have appropriate power!
 
@@ -962,7 +965,8 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
 #endif
 
 #ifndef ENABLE_OTA
-#define ENABLE_OTA              1   // Listen for over the air update to the flash
+//Changed to see if the WebServer and OTA are conflicting.
+#define ENABLE_OTA              0   // Listen for over the air update to the flash
 #endif
 
 #ifndef ENABLE_NTP

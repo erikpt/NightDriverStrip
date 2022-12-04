@@ -819,6 +819,20 @@ void setup()
     CheckHeap();
 }
 
+void listAllFiles()
+{
+    Serial.println("List All Files");
+    File root = SPIFFS.open("/");
+
+    File file = root.openNextFile();
+
+    while(file){
+        Serial.print("FILE: ");
+        Serial.println(file.name());
+        file = root.openNextFile();
+    }
+}
+
 // loop - main execution loop
 //
 // This is where an Arduino app spends most of its life but since we spin off tasks for much of our work, all that remains here is
@@ -862,5 +876,13 @@ void loop()
         }
 
         delay(10);        
+
+        EVERY_N_SECONDS(10) {
+            listAllFiles();
+        }
+
     }
 }
+
+
+
