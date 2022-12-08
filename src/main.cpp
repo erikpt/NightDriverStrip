@@ -824,6 +824,7 @@ void setup()
     CheckHeap();
 }
 
+#if ENABLE_WEBSERVER
 void listAllFiles()
 {
     Serial.println("List All Files");
@@ -837,7 +838,7 @@ void listAllFiles()
         file = root.openNextFile();
     }
 }
-
+#endif
 // loop - main execution loop
 //
 // This is where an Arduino app spends most of its life but since we spin off tasks for much of our work, all that remains here is
@@ -882,10 +883,11 @@ void loop()
 
         delay(10);        
 
+        #if ENABLE_WEBSERVER
         EVERY_N_SECONDS(10) {
             listAllFiles();
         }
-
+        #endif
     }
 }
 

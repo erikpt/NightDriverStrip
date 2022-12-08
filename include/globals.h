@@ -678,7 +678,7 @@ extern RemoteDebug Debug;           // Let everyone in the project know about it
     #define ENABLE_AUDIO            0           // Listen for audio from the microphone and process it
     #define LED_PIN0                5           // Pin used to control the LED string.  Ensure that you also remember to conenct to ground.
 
-    #define ENABLE_WEBSERVER        1           // Turn on the internal webserver
+    #define ENABLE_WEBSERVER        0           // Turn on the internal webserver
 
 
     #define POWER_LIMIT_MW (INT_MAX)              // Unlimited power for long strips, up to you to limit here or supply enough!
